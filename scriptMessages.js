@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
     loadMessageSuggestions();  // Loads the clickable message suggestions for quick chat options.
     setupChatInputListener();  // Configures listeners for chat input, handling Enter key and Send button.
     setupChatIconListener();   // Ensures the chat icon toggles the visibility of the chat box correctly.
+
+    displayMessage("Welcome to the chat! How can we assist you today?", 'right', 'rgb(160, 102, 203)');
 });
 
 const predefinedMessages = [
@@ -17,11 +19,11 @@ const predefinedMessages = [
 
 const responses = {
     "Confirm arrival time.": ["Arrival time confirmed. Welcome!", "Your arrival time is noted.", "Thanks for confirming your arrival"],
-    "Schedule maintenance.": ["Maintenance scheduled.", "Your maintenance request is confirmed.", "We're a little busy but we'll get to your maintenance soon."],
-    "Request catering services.": ["Catering services scheduled.", "Your catering is on its way.", "Thanks for the heads up. Catering is arranged."],
+    "Schedule maintenance.": ["Maintenance scheduled.", "We've got your maintenance covered.", "We're a little busy but we'll get to your maintenance soon."],
+    "Request catering services.": ["Catering services scheduled.", "Your catering is on its way.", "Thanks for the heads up. Catering is arranged.", "Sorry, we're out of catering right now."],
     "Inquire about parking availability.": ["Parking is available.", "We have your parking reserved.", "Parking is a little tight but we've got you covered.", "Unfortunately, parking is full right now. We'll let you know when a spot opens up!"],
     "Confirm departure time.": ["Departure time confirmed.", "Your departure is scheduled.", "Thanks for the heads up. Departure time noted."],
-    "Ask for fuel services.": ["Fuel service scheduled.", "Refueling complete soon", "Arranging fuel services.", "We're a little busy but we'll get to fueling you soon."]
+    "Ask for fuel services.": ["Fuel service scheduled.", "Refueling complete soon", "Arranging fuel services.", "We're a little busy at the moment but we'll get to fueling you soon."]
 };
 
 function setupChatInputListener() {
@@ -74,11 +76,8 @@ function sendAndProcessMessage(messageText) {
         div.className = 'new-fbo-name-msg';
         div.textContent = `Now chatting with ${fboName}`;
 
-        if (currentFBO !== "") {
-            messagesContainer.appendChild(hr);
-        }
-
         // Append new elements to the container
+        messagesContainer.appendChild(hr);
         messagesContainer.appendChild(div);
 
         currentFBO = fboName;

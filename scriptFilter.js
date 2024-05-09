@@ -137,10 +137,24 @@ function displayRandomFBOs() {
 }
 
 function updateFBOGrid() {
-    let filteredData = fboData.filter(fbo => {
+    let randomFBOs = fboData;
+
+    // filter the FBOs based on call sign first
+    let callSign = document.querySelector('.call-sign-filter').value;
+    if (callSign) {
+        // filter between 5-8 random FBOs from anywhere in the list (does not depend on the call sign)
+        let selectionLength = Math.floor(Math.random() * 4) + 5;
+        randomFBOs = randomFBOs.splice(Math.floor(Math.random() * (randomFBOs.length - selectionLength)), selectionLength);
+    }
+
+    let filteredData = randomFBOs.filter(fbo => {
         return Array.from(selectedFilters).every(filter => {
             if (filter.category === 'Services') {
                 return fbo.services.includes(filter.option);
+            } else if (filter.category === 'Price') {
+                return fbo.fees.includes(filter.option);
+            } else if (filter.category === 'Operating Hours') {
+                return fbo.hours.includes(filter.option);
             }
             return fbo[filter.category.toLowerCase()] === filter.option;
         });
@@ -178,6 +192,27 @@ function createFilterBubbles() {
         filterBubble.onclick = () => displayFilterOptions(filter);
         filterBar.appendChild(filterBubble);
     });
+
+    // Create a filter for pilots to enter their call sign and filter the FBOs
+    // since we're building a mockup, we'll just select 5-8 random FBOs
+    const callSignFilter = document.createElement('input');
+    callSignFilter.type = 'text';
+    callSignFilter.placeholder = 'Call Sign';
+    callSignFilter.className = 'call-sign-filter';
+
+    // Initialize timeout property if it doesn't exist
+    callSignFilter.timeout = callSignFilter.timeout || null;
+
+    callSignFilter.oninput = () => {
+        // filter once user stops typing for 1 seconds
+        clearTimeout(callSignFilter.timeout);
+        callSignFilter.timeout = setTimeout(() => {
+            updateFBOGrid();
+        }, 1000);
+    }
+
+    // append the call sign filter to the filter bar
+    filterBar.appendChild(callSignFilter);
 }
 
 function displayFilterOptions(selectedFilter) {

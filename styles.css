@@ -265,15 +265,11 @@ header {
     font-family: 'Quicksand', sans-serif;
 }
 
-.as-who span {
-    margin-right: 15px;
-}
-
-
 select {
     border: none;
     outline: none;
     font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
 }
 
 .chatInput-wrapper {
@@ -347,6 +343,7 @@ footer {
     cursor: pointer;
     transition: all 0.3s;
     font-size: 14px;
+    font-weight: 500;
     height: 20px;
     width: fit-content;
     max-width: fit-content;
@@ -456,12 +453,6 @@ footer {
     background-color: black;
     color: white;
     border: 2px solid black;
-}
-
-.filter-options {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
 }
 
 nav {
@@ -641,3 +632,37 @@ a:first-child::after {
     max-width: 65%;
 }
 
+.call-sign-filter {
+    outline: none;
+    border: none;
+    border-radius: 8px;
+    background: rgba(160, 170, 190, 0.6);
+    color: black;
+    position: relative;
+    margin-left: 15px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transform: translateY(3px);
+    height: 35px;
+    text-align: center;
+    transition: scale 0.3s;
+    cursor: text;
+}
+
+.call-sign-filter::placeholder {
+    color: black;
+}
+
+.call-sign-filter:hover {
+    scale: 1.05;
+}
+
+.call-sign-filter:focus {
+    outline: none;
+    border: 2px solid black;
+    margin-left: 11px;
+}
+
+.call-sign-filter:focus::placeholder {
+    color: transparent;
+}
