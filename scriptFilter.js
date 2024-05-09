@@ -197,7 +197,7 @@ function createFilterBubbles() {
     // since we're building a mockup, we'll just select 5-8 random FBOs
     const callSignFilter = document.createElement('input');
     callSignFilter.type = 'text';
-    callSignFilter.placeholder = 'Call Sign';
+    callSignFilter.placeholder = 'ACN or Call Sign';
     callSignFilter.className = 'call-sign-filter';
 
     // Initialize timeout property if it doesn't exist
